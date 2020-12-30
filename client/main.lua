@@ -17,7 +17,7 @@ Citizen.CreateThread(function()
             if IsControlJustReleased(0, 38) then -- Checking for key press, visit https://docs.fivem.net/docs/game-references/controls/ for more info
                 ESX.TriggerServerCallback('irp-medic:checkAmbulance', function(isAvailable) -- Callback to ensure there are less then a specificed amount of medics online, check server for more info
                     if isAvailable then
-                        exports['progressBars']:startUI((10000), "RECOVERING")
+                        exports['progressBars']:startUI((10000), "RECOVERING") -- Replace this with any progress bar
                         Citizen.Wait(10000)
                         ESX.ShowNotification('Welcome to the land of the living')
                         TriggerEvent('vanq_ambulancejob:revive')
@@ -33,12 +33,10 @@ end)
 function SpawnNpc() -- Simple function to spawn NPC at config.coords
     RequestModel(GetHashKey("s_m_y_autopsy_01"))
     while not HasModelLoaded(GetHashKey("s_m_y_autopsy_01")) do
-		Citizen.Wait(100)
+		Citizen.Wait(50)
     end
     local medicped = CreatePed(7, GetHashKey("s_m_y_autopsy_01"), Config.Coords.x, Config.Coords.y, Config.Coords.z, 250.23, true, true)
     FreezeEntityPosition(medicped,true)
-	SetBlockingOfNonTemporaryEvents(medicped, true)
-	TaskStartScenarioInPlace(medicped, "WORLD_HUMAN_AA_SMOKE", 0, false)
 	SetEntityInvincible(medicped,true)
 
 end
