@@ -30,7 +30,7 @@ end
 end
 end)
 
-function SpawnNpc() -- Simple function to spawn NPC at config.coords
+function SpawnNpc() -- Simple function to spawn NPC at config.coords, thank you to t1ger for helping me figure this out.
     RequestModel(GetHashKey("s_m_y_autopsy_01"))
     while not HasModelLoaded(GetHashKey("s_m_y_autopsy_01")) do
 		Citizen.Wait(50)
