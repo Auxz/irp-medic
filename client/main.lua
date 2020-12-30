@@ -13,7 +13,7 @@ Citizen.CreateThread(function()
     Citizen.Wait(1) -- While loop to determine distance, runs every frame (This can have a negative impact on performance)
     local distance = GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), Config.Coords.x, Config.Coords.y, Config.Coords.z, true)
     if distance < 1.5 then -- Distance Check
-        DrawText3Ds(361.25, -580.51, 28.83, "Press ~g~[E]~s~ for Medic") -- 3D Text, you can alter the control if desired, make sure to adjust it on the next line as well
+        DrawText3Ds(Config.Coords.x, Config.Coords.y, Config.Coords.z, "Press ~g~[E]~s~ for Medic") -- 3D Text, you can alter the control if desired, make sure to adjust it on the next line as well
             if IsControlJustReleased(0, 38) then -- Checking for key press, visit https://docs.fivem.net/docs/game-references/controls/ for more info
                 ESX.TriggerServerCallback('irp-medic:checkAmbulance', function(isAvailable) -- Callback to ensure there are less then a specificed amount of medics online, check server for more info
                     if isAvailable then
@@ -35,7 +35,7 @@ function SpawnNpc() -- Simple function to spawn NPC at config.coords
     while not HasModelLoaded(GetHashKey("s_m_y_autopsy_01")) do
 		Citizen.Wait(100)
     end
-    local medicped = CreatePed(7, GetHashKey("s_m_y_autopsy_01"), 361.25, -580.51, 27.85, 250.23, true, true)
+    local medicped = CreatePed(7, GetHashKey("s_m_y_autopsy_01"), Config.Coords.x, Config.Coords.y, Config.Coords.z, 250.23, true, true)
     FreezeEntityPosition(medicped,true)
 	SetBlockingOfNonTemporaryEvents(medicped, true)
 	TaskStartScenarioInPlace(medicped, "WORLD_HUMAN_AA_SMOKE", 0, false)
